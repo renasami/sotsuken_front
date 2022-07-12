@@ -2,9 +2,10 @@ const env = import.meta.env.MODE
 type Status = {
     status: number
 }
-export async function fetchJSON<T>(path: string, options: RequestInit): Promise<T> {
-    if (env === "development") path = `http://hogehoge.com/${path}`
-    else path = `http://localhost:8080/${path}`
+export async function fetchJSON<T>(path: string, options?: RequestInit): Promise<T> {
+
+    if (env === "development") path = `http://localhost:8080${path}`
+    else path = `http://hogehoge.com${path}`
     const res = await fetch(path, options)
     
     return (await res.json()) as T
@@ -15,8 +16,8 @@ export async function fetchJSON<T>(path: string, options: RequestInit): Promise<
     options: RequestInit,
     allowedStatusCodes?: number[],
   ): Promise<T | Status| null> {
-    if (env === "development") path = `http://hogehoge.com/${path}`
-    else path = `http://localhost:8080/${path}`
+    if (env === "development") path = `http://localhost:8080/${path}`
+    else path = `http://hogehoge.com/${path}`
     allowedStatusCodes = allowedStatusCodes || [404]
     const res = await fetch(path, options)
   

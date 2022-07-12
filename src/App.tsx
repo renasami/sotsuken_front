@@ -1,10 +1,14 @@
 import { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
+import {fetchJSON} from "./api/api"
 
 function App() {
   const [count, setCount] = useState(0)
-
+  const testRequest = async () => {
+    const result = await  fetchJSON("/users/hoge",{method: "GET"})
+    console.log(result)
+  }
   return (
     <div className="App">
       <header className="App-header">
@@ -13,6 +17,11 @@ function App() {
         <p>
           <button type="button" onClick={() => setCount((count) => count + 1)}>
             count is: {count}
+          </button>
+        </p>
+        <p>
+          <button onClick={() => testRequest()}>
+            test request
           </button>
         </p>
         <p>
