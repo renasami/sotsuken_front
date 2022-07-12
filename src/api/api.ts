@@ -5,7 +5,8 @@ type Status = {
 export async function fetchJSON<T>(path: string, options?: RequestInit): Promise<T> {
 
     if (env === "development") path = `http://localhost:8080${path}`
-    else path = `http://hogehoge.com${path}`
+    // else path = `http://hogehoge.com${path}`
+    else return await (await fetch("https://www.example.com")).json()
     const res = await fetch(path, options)
     
     return (await res.json()) as T
@@ -17,7 +18,9 @@ export async function fetchJSON<T>(path: string, options?: RequestInit): Promise
     allowedStatusCodes?: number[],
   ): Promise<T | Status| null> {
     if (env === "development") path = `http://localhost:8080/${path}`
-    else path = `http://hogehoge.com/${path}`
+    // else path = `http://hogehoge.com/${path}`
+    else return await (await fetch("https://www.example.com")).json()
+
     allowedStatusCodes = allowedStatusCodes || [404]
     const res = await fetch(path, options)
   
